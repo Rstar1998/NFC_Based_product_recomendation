@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended products</title>
+</head>
+<body>
+    <!-- <h1>Status: {{ message }}</h1> -->
+    
+    {% if message != "false" %}
+    <!-- <p>NFC Tag: {{ nfc_tag }}</p>
+    <p>Chip Type: {{ chip_type }}</p> -->
+    <h2>Original Scanned Product:</h2>
+
+    <p>Product ID: {{ product_id }}</p>
+    <p>Product Name: {{ product_name }}</p>
+    <img src="{{ url }}" alt="{{ product_name }}" width="200" />
+
+
+    {% if recommended_products %}
+        <h2>Recommended Products:</h2>
+        <ul>
+            {% for product in recommended_products %}
+                <li>
+                    <strong>{{ product.product_name }}</strong><br>
+                    Price: {{ product.price if product.price else 'N/A' }}<br>
+                    {% if product.url %}
+                    <br>
+                        <img src="{{ product.url }}" alt="{{ product.product_name }}" width="200" />
+                        <br>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No recommended products found for this item.</p>
+    {% endif %}
+    {% else %}
+    <p>No product details available.</p>
+    {% endif %}
+</body>
+</html>
